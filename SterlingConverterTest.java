@@ -62,19 +62,19 @@ public class SterlingConverterTest {
      @Test
      public void justPoundsTest() {
          String input = "£33";
-         assertEquals("33 x £1", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("16 x £2, 1 x £1", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
      public void bothSymbolTest() {
          String input = "£3.55p";
-         assertEquals("3 x £1, 1 x 50p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("1 x £2, 1 x £1, 1 x 50p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
      public void missingPenceTest() {
          String input = "£2.p";
-         assertEquals("2 x £1", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("1 x £2", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
@@ -86,14 +86,14 @@ public class SterlingConverterTest {
      @Test
      public void bufferedZerosTest() {
          String input = "£002.65p";
-         assertEquals("2 x £1, 1 x 50p, 1 x 10p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("1 x £2, 1 x 50p, 1 x 10p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      } 
      
      @Test
      public void roundingPenceTest() {
          String input = "4.326";
-         assertEquals("4 x £1, 1 x 20p, 1 x 10p, 1 x 2p, 1 x 1p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("2 x £2, 1 x 20p, 1 x 10p, 1 x 2p, 1 x 1p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
          input = "4.324";
-         assertEquals("4 x £1, 1 x 20p, 1 x 10p, 1 x 2p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("2 x £2, 1 x 20p, 1 x 10p, 1 x 2p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
 }
