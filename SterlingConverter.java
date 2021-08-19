@@ -31,17 +31,17 @@ public class SterlingConverter {
     public String convert(int total) {
         StringBuilder result = new StringBuilder("");
         int[] coinValues = {100, 50, 20, 10, 5, 2, 1};
-        int coinAmmount;
+        int coinAmount;
         for(int i=0; i<coinValues.length; i++) {
             if(total == 0) {
                 break;
             }
-            coinAmmount = total/coinValues[i];
-            if(coinAmmount != 0) {
+            coinAmount = total/coinValues[i];
+            if(coinAmount != 0) {
                 if(coinValues[i] == 100) {
-                    result.append(coinAmmount + " x £1, ");        
+                    result.append(coinAmount + " x £1, ");        
                 } else {
-                    result.append(coinAmmount + " x " + coinValues[i] + "p, ");
+                    result.append(coinAmount + " x " + coinValues[i] + "p, ");
                 }
             }
 
