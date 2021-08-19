@@ -16,4 +16,19 @@ public class SterlingConverter {
             sc.close();
         }
     }
+
+    //function to check that the user input is of a valid form
+    public boolean checkValidInput(String input) {
+        return(true);
+    }
+
+    //function to format the user input
+    public int formatInput(String input) {               
+        return 0;
+    }
+
+    //function to convert pennies to sterling coins
+    public String convert(int total) {
+        return "output";
+    }
 }
