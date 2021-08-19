@@ -79,7 +79,7 @@ public class SterlingConverter {
      */
     public String convert(int total) {
         StringBuilder result = new StringBuilder("");
-        int[] coinValues = {100, 50, 20, 10, 5, 2, 1};
+        int[] coinValues = {200, 100, 50, 20, 10, 5, 2, 1};
         int coinAmount;
         for(int i=0; i<coinValues.length; i++) {
             if(total == 0) {
@@ -87,8 +87,8 @@ public class SterlingConverter {
             }
             coinAmount = total/coinValues[i];
             if(coinAmount != 0) {
-                if(coinValues[i] == 100) {
-                    result.append(coinAmount + " x £1, ");        
+                if(coinValues[i] == 100 || coinValues[i] == 200) {
+                    result.append(coinAmount + " x £" + coinValues[i]/100 + ", ");        
                 } else {
                     result.append(coinAmount + " x " + coinValues[i] + "p, ");
                 }
