@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SterlingConverter {
     public static void main(String[] args) {
@@ -6,23 +8,35 @@ public class SterlingConverter {
 
         Scanner sc = new Scanner(System.in);
         String input, output;
-        try {
-            while(true) {
-                input = sc.nextLine();
-                output = sterlingConverter.convert(sterlingConverter.formatInput(input));
-                System.out.println(output);
-            }
-        } finally {
-            sc.close();
+        while(sc.hasNextLine()) {
+            input = sc.nextLine();
+            output = sterlingConverter.checkValidInput(input) ?
+                        input + " = " + sterlingConverter.convert(sterlingConverter.formatInput(input)) :
+                        "Invalid input";
+            System.out.println(output);
         }
+        sc.close();
     }
 
-    //function to check that the user input is of a valid form
+    /**
+     * checks that the user input is of a valid form
+     * 
+     * @param input command line input from user
+     * @return whether or not the input is valid
+     */
     public boolean checkValidInput(String input) {
-        return(true);
+        Pattern pattern = Pattern.compile("^[£]?[0-9][0-9]*[.]?[0-9]*[p]?$|^[£]?[0-9]*[.]?[0-9][0-9]*[p]?$");
+        Matcher matcher = pattern.matcher(input);
+        return(matcher.find());
     }
 
-    //function to format the user input
+
+    /**
+     * formats the user input by converting it to pence
+     * 
+     * @param input validated user input
+     * @return input value converted to pence
+     */
     public int formatInput(String input) {               
         int value = 0;
         input = input.charAt(input.length()-1) == 'p' ? input.substring(0, input.length()-1) : input;
@@ -58,7 +72,12 @@ public class SterlingConverter {
         return value;
     }
 
-    //function to convert pennies to sterling coins
+    /**
+     * converts value in pence to sterling coins
+     * 
+     * @param total value of the user input in pence 
+     * @return String of user input converted to sterling coin
+     */
     public String convert(int total) {
         StringBuilder result = new StringBuilder("");
         int[] coinValues = {100, 50, 20, 10, 5, 2, 1};
@@ -78,7 +97,7 @@ public class SterlingConverter {
             total = total % coinValues[i];
         }
         String output = result.toString();
-        output = output == "" ? output : output.substring(0, output.length()-2); //remove the final ", " at the end of the string
+        output = output == "" ? "0" : output.substring(0, output.length()-2); //remove the final ", " at the end of the string
 
         return output;
     }
