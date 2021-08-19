@@ -1,3 +1,6 @@
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +32,6 @@ public class SterlingConverter {
         Matcher matcher = pattern.matcher(input);
         return(matcher.find());
     }
-
 
     /**
      * formats the user input by converting it to pence
@@ -100,5 +102,35 @@ public class SterlingConverter {
         output = output == "" ? "0" : output.substring(0, output.length()-2); //remove the final ", " at the end of the string
 
         return output;
+    }
+
+    @Test
+    public void emptyInputTest() {
+        String input = "";
+        assertEquals(false, checkValidInput(input));
+    }
+ 
+    @Test
+    public void invalidSymbolTest() {
+        String input = "£1x.34";
+        assertEquals(false, checkValidInput(input));
+    }
+ 
+    @Test
+    public void missingDigitsTest() {
+        String input = "£p";
+        assertEquals(false, checkValidInput(input));
+    }
+ 
+    @Test
+    public void duplicateSymbolTest() {
+        String input = "£13..45p";
+        assertEquals(false, checkValidInput(input));
+    }
+ 
+    @Test
+    public void validInputTest() {
+        String input = "£13.45p";
+        assertEquals(true, checkValidInput(input));
     }
 }
