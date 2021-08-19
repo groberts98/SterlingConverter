@@ -6,6 +6,8 @@ public class SterlingConverter {
     public static void main(String[] args) {
         SterlingConverter sterlingConverter = new SterlingConverter();
 
+        System.out.println("Welcome to sterling converter!");
+        
         Scanner sc = new Scanner(System.in);
         String input, output;
         while(sc.hasNextLine()) {
