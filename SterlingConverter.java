@@ -25,7 +25,7 @@ public class SterlingConverter {
      * @return whether or not the input is valid
      */
     public boolean checkValidInput(String input) {
-        Pattern pattern = Pattern.compile("^[£]?[0-9][0-9]*[.]?[0-9]*[p]?$|^[£]?[0-9]*[.]?[0-9][0-9]*[p]?$");
+        Pattern pattern = Pattern.compile("^[\u00A3]?[0-9][0-9]*[.]?[0-9]*[p]?$|^[\u00A3]?[0-9]*[.]?[0-9][0-9]*[p]?$");
         Matcher matcher = pattern.matcher(input);
         return(matcher.find());
     }
@@ -88,7 +88,7 @@ public class SterlingConverter {
             coinAmount = total/coinValues[i];
             if(coinAmount != 0) {
                 if(coinValues[i] == 100 || coinValues[i] == 200) {
-                    result.append(coinAmount + " x £" + coinValues[i]/100 + ", ");        
+                    result.append(coinAmount + " x \u00A3" + coinValues[i]/100 + ", ");        
                 } else {
                     result.append(coinAmount + " x " + coinValues[i] + "p, ");
                 }

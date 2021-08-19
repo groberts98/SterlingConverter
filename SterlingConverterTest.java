@@ -13,25 +13,25 @@ public class SterlingConverterTest {
  
     @Test
     public void invalidSymbolTest() {
-        String input = "£1x.34";
+        String input = "\u00A31x.34";
         assertEquals(false, sterlingConverter.checkValidInput(input));
     }
  
     @Test
     public void missingDigitsTest() {
-        String input = "£p";
+        String input = "\u00A3p";
         assertEquals(false, sterlingConverter.checkValidInput(input));
     }
  
     @Test
     public void duplicateSymbolTest() {
-        String input = "£13..45p";
+        String input = "\u00A313..45p";
         assertEquals(false, sterlingConverter.checkValidInput(input));
     }
  
     @Test
     public void validInputTest() {
-        String input = "£13.45p";
+        String input = "\u00A313.45p";
         assertEquals(true, sterlingConverter.checkValidInput(input));
     }
  
@@ -50,50 +50,50 @@ public class SterlingConverterTest {
      @Test
      public void poundsDecimalTest() {
          String input = "1.35";
-         assertEquals("1 x £1, 1 x 20p, 1 x 10p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("1 x \u00A31, 1 x 20p, 1 x 10p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
      public void poundsDecimalWithSymbolTest() {
-         String input = "£1.3";
-         assertEquals("1 x £1, 1 x 20p, 1 x 10p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         String input = "\u00A31.3";
+         assertEquals("1 x \u00A31, 1 x 20p, 1 x 10p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
      public void justPoundsTest() {
-         String input = "£33";
-         assertEquals("16 x £2, 1 x £1", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         String input = "\u00A333";
+         assertEquals("16 x \u00A32, 1 x \u00A31", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
      public void bothSymbolTest() {
-         String input = "£3.55p";
-         assertEquals("1 x £2, 1 x £1, 1 x 50p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         String input = "\u00A33.55p";
+         assertEquals("1 x \u00A32, 1 x \u00A31, 1 x 50p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
      public void missingPenceTest() {
-         String input = "£2.p";
-         assertEquals("1 x £2", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         String input = "\u00A32.p";
+         assertEquals("1 x \u00A32", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
      public void missingPoundsTest() {
-         String input = "£.34p";
+         String input = "\u00A3.34p";
          assertEquals("1 x 20p, 1 x 10p, 2 x 2p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
  
      @Test
      public void bufferedZerosTest() {
-         String input = "£002.65p";
-         assertEquals("1 x £2, 1 x 50p, 1 x 10p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         String input = "\u00A3002.65p";
+         assertEquals("1 x \u00A32, 1 x 50p, 1 x 10p, 1 x 5p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      } 
      
      @Test
      public void roundingPenceTest() {
          String input = "4.326";
-         assertEquals("2 x £2, 1 x 20p, 1 x 10p, 1 x 2p, 1 x 1p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("2 x \u00A32, 1 x 20p, 1 x 10p, 1 x 2p, 1 x 1p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
          input = "4.324";
-         assertEquals("2 x £2, 1 x 20p, 1 x 10p, 1 x 2p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
+         assertEquals("2 x \u00A32, 1 x 20p, 1 x 10p, 1 x 2p", sterlingConverter.convert(sterlingConverter.formatInput(input)));
      }
 }
